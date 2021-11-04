@@ -1,13 +1,6 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * admin area. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
  * @link              https://www.kbuum.com
  * @since             1.0.0
  * @package           Nm_timeline
@@ -15,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       Nordic Milk Timeline
  * Plugin URI:        https://www.taifuun.ee
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This plugin adds timeline custom post type for event creation. For displaying in public, use nm_timeline shortcode.
  * Version:           1.0.0
  * Author:            Sten Tibbing
  * Author URI:        https://www.kbuum.com
@@ -32,14 +25,11 @@ if ( ! defined( 'WPINC' ) ) {
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
  */
 define( 'NM_TIMELINE_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-nm_timeline-activator.php
  */
 function activate_nm_timeline() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nm_timeline-activator.php';
@@ -48,7 +38,6 @@ function activate_nm_timeline() {
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-nm_timeline-deactivator.php
  */
 function deactivate_nm_timeline() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-nm_timeline-deactivator.php';
@@ -60,23 +49,17 @@ register_deactivation_hook( __FILE__, 'deactivate_nm_timeline' );
 
 /**
  * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-nm_timeline.php';
 
 /**
  * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
  */
 function run_nm_timeline() {
 
 	$plugin = new Nm_timeline();
 	$plugin->run();
+
 
 }
 run_nm_timeline();
