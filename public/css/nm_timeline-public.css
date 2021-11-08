@@ -1,4 +1,68 @@
-/**
- * All of the CSS for your public-facing functionality should be
- * included in this file.
- */
+body.slider-grabbed {
+  cursor: grabbing;
+}
+
+.nm-timeline {
+  display: flex;
+}
+
+.nmt-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nmt-side-first-date,
+.nmt-side-last-date {
+  font-weight: bold;
+}
+
+.nmt-side-mid-dates-wrapper {
+  display: flex;
+  width: 161px;
+}
+
+.nmt-side-mid-dates {
+  padding: 20px 0;
+  width: 80px;
+}
+
+.nmt-side-mid-date {
+  padding: 10px 20px;
+}
+
+.nmt-side-mid-separator {
+  position: relative;
+  width: 1px;
+  background-color: #000000;
+}
+
+.nmt-separator-point {
+  position: absolute;
+  width: 10px;
+  height: 1px;
+  left: -10px;
+  background-color: #000000;
+}
+
+.nmt-side-slider {
+  position: absolute;
+  display: flex;
+  left: -4px;
+  cursor: grab;
+}
+
+.nmt-side-slider-point {
+  width: 10px;
+  height: 1px;
+  background-color: #000000;
+}
+
+.nmt-side-slider-hand {
+  top: -16px;
+  left: 20px;
+  width: 43px;
+  height: 29px;
+  background-image: url(../img/nm-timeline-sep-pointer.svg);
+}
+

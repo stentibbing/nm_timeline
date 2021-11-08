@@ -122,7 +122,7 @@ class Nm_timeline_Admin
         add_action('manage_event_posts_custom_column', function ($column_key, $post_id) {
             if ($column_key == 'event_date') {
                 $event_date = get_post_meta($post_id, 'nm_timeline_event_date', true);
-                echo (!empty($event_date)) ? date("d.m.Y", strtotime($event_date)) : __('Not set', 'nm_timeline');
+                echo (!empty($event_date)) ? date("d.m.Y", $event_date) : __('Not set', 'nm_timeline');
             }
         }, 10, 2);
 
@@ -167,7 +167,7 @@ class Nm_timeline_Admin
          * If post meta has timeline event date and it is not unix epoch time, assign event date to datepicker for populating datepicker and hidden input
          */
         if (get_post_meta($post->ID, 'nm_timeline_event_date', true) && get_post_meta($post->ID, 'nm_timeline_event_date', true) != date('m/d/Y', 0)) {
-            $datepicker_date = get_post_meta($post->ID, 'nm_timeline_event_date', true);
+            $datepicker_date = date('m/d/Y', get_post_meta($post->ID, 'nm_timeline_event_date', true));
         } ?>
 
         <div 
@@ -204,7 +204,7 @@ class Nm_timeline_Admin
         /**
          * For sanitation purposes we convert passed string to date. Incase of non compliant date string, unix epoch time is saved.
          */
-        $datepicker_date = date("m/d/Y", strtotime($_POST['nm_timeline_event_date']));
+        $datepicker_date = strtotime($_POST['nm_timeline_event_date']);
         update_post_meta($post_id, 'nm_timeline_event_date', $datepicker_date);
     }
 }
