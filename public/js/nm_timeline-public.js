@@ -1,17 +1,12 @@
 (function ($) {
   "use strict";
   $(function () {
-    const MutationObserver = window.MutationObserver;
-    const myObserver = new MutationObserver((mutation) => {
-      updateSliderDate(mutation[0].target.style.top);
-    });
     const dates = $(".nmt-date");
     const separator = $(".nmt-side-mid-separator");
 
-    let dragInitiated = false;
-    let originalSliderPos = 0;
-    let originalCurPos = 0;
-
+    /**
+     * Create array of event objects
+     */
     const events = [];
     let eventIteration = 0;
 
@@ -22,7 +17,7 @@
       } else if (eventIteration == dates.length - 1) {
         separatorPointY = separator.height() - 1;
       } else {
-        separatorPointY = $(this).position().top - 1;
+        separatorPointY = $(this).position().top;
       }
       events.push({
         id: $(this).data("id"),
@@ -32,45 +27,64 @@
       eventIteration++;
     });
 
-    events.forEach(function (event) {
-      separator.append(
-        '<div class="nmt-separator-point" style="top:' +
-          event.top +
-          'px;"></div>'
-      );
+    /**
+     * Observe slider changes and update date label accordingly
+     */
+    let activeEventId = events[0].id;
+    const MutationObserver = window.MutationObserver;
+    const myObserver = new MutationObserver((mutation) => {
+      let top = parseInt(mutation[0].target.style.top);
+      let updatedDate;
+      for (let i = 0; i <= events.length - 1; i++) {
+        if (top == events[i].top) {
+          updatedDate = events[i].date;
+        } else if (top > events[i].top && top < events[i + 1].top) {
+          let topOverDate = top - events[i].top;
+          let incrementPerTop =
+            (events[i + 1].date - events[i].date) /
+            (events[i + 1].top - events[i].top);
+          updatedDate = Math.round(
+            events[i].date + topOverDate * incrementPerTop
+          );
+        }
+        $(".nmt-side-slider-label").html(updatedDate);
+      }
     });
-
-    function stickToNearest() {
-      let sliderPos = $(".nmt-side-slider").position().top;
-
-      let nearest = events.reduce(function (prev, cur) {
-        return Math.abs(cur.top - sliderPos) < Math.abs(prev.top - sliderPos)
-          ? cur
-          : prev;
-      });
-
-      $(".nmt-side-slider").animate({ top: nearest.top });
-    }
 
     $(".nmt-side-slider").each(function () {
       myObserver.observe(this, { attributes: true });
     });
 
-    function updateSliderDate(sliderTop) {
-      let top = parseInt(sliderTop);
-      for (let i = 0; i <= events.length - 1; i++) {
-        if (top > events[i].top && top < events[i + 1].top) {
-          let topOverDate = top - events[i].top;
-          let incrementPerTop =
-            (events[i + 1].date - events[i].date) /
-            (events[i + 1].top - events[i].top);
-          let updatedDate = Math.round(
-            events[i].date + topOverDate * incrementPerTop
-          );
-          $(".nmt-side-slider-label").html(updatedDate);
+    /**
+     * Find the nearest event date to slider, move slider to that
+     * and render content for that date if not currently active
+     */
+    function selectNearestDate() {
+      let sliderPos = $(".nmt-side-slider").position().top;
+      let nearest = events.reduce(function (prev, cur) {
+        return Math.abs(cur.top - sliderPos) < Math.abs(prev.top - sliderPos)
+          ? cur
+          : prev;
+      });
+      $(".nmt-side-slider").animate({ top: nearest.top }, 400, function () {
+        if (nearest.id != activeEventId) {
+          $(".nmt-content-event.active-event").fadeOut(400, function () {
+            $(".nmt-content-event[data-id='" + nearest.id + "']")
+              .fadeIn(400, function () {})
+              .addClass("active-event");
+            activeEventId = nearest.id;
+            $(this).removeClass("active-event");
+          });
         }
-      }
+      });
     }
+
+    /**
+     * Listen to events for user interaction
+     */
+    let dragInitiated = false;
+    let originalSliderPos = 0;
+    let originalCurPos = 0;
 
     $(".nmt-side-slider").mousedown(function (event) {
       event.preventDefault();
@@ -84,7 +98,7 @@
       .mouseup(function () {
         dragInitiated = false;
         $("*").css("cursor", "");
-        stickToNearest();
+        selectNearestDate();
       })
       .mousemove(function (event) {
         if (dragInitiated) {
@@ -92,7 +106,7 @@
           let sliderPos = originalSliderPos + curChange;
           if (sliderPos < 0) {
             sliderPos = 0;
-          } else if (sliderPos > separator.height()) {
+          } else if (sliderPos > separator.height() - 1) {
             sliderPos = separator.height();
           } else {
             $(".nmt-side-slider").css("top", sliderPos + "px");

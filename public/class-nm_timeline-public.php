@@ -46,21 +46,6 @@ class Nm_timeline_Public
      */
     public function add_shortcodes()
     {
-        $args = array(
-            'post_type' => 'event',
-            'orderby' => 'meta_value_num',
-            'meta_key' => 'nm_timeline_event_date',
-            'order' => 'ASC',
-            'nopaging' => true,
-        );
-
-        foreach (get_posts($args) as $event) {
-            // echo '<pre>';
-            // echo $event->post_title;
-            // var_dump(get_post_meta($event->ID));
-            // echo '</pre>';
-        }
-
         add_shortcode('nm_timeline', array($this, 'return_timeline'));
     }
 
@@ -74,7 +59,7 @@ class Nm_timeline_Public
 
         $args = array(
             'post_type' => 'event',
-            'orderby' => 'meta_value',
+            'orderby' => 'meta_value_num',
             'meta_key' => 'nm_timeline_event_date',
             'order' => 'ASC',
             'nopaging' => true,
@@ -95,7 +80,7 @@ class Nm_timeline_Public
         if (count($events) >= 3) {
             return require_once plugin_dir_path(__FILE__) . '/partials/nm_timeline-public-display.php';
         } else {
-            return __('Insufficient events');
+            return __('Not enough events to display');
         }
     }
 }

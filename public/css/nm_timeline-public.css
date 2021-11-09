@@ -10,6 +10,7 @@ body.slider-grabbed {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-right: 200px;
 }
 
 .nmt-side-first-date,
@@ -52,17 +53,40 @@ body.slider-grabbed {
   cursor: grab;
 }
 
-.nmt-side-slider-point {
+/* .nmt-side-slider-point {
   width: 10px;
   height: 1px;
   background-color: #000000;
-}
+} */
 
 .nmt-side-slider-hand {
-  top: -16px;
+  position: absolute;
+  top: -20px;
   left: 20px;
   width: 43px;
   height: 29px;
   background-image: url(../img/nm-timeline-sep-pointer.svg);
 }
 
+.nmt-side-slider-label {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 32px;
+  top: -23px;
+  left: 70px;
+}
+
+.nmt-content-side {
+  width: 30%;
+  margin-right: 100px;
+}
+
+.nmt-content-event {
+  display: none;
+}
+
+.nmt-content-event.active-event {
+  display: flex;
+}
