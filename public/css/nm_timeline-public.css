@@ -16,6 +16,7 @@ body.slider-grabbed {
 .nmt-side-first-date,
 .nmt-side-last-date {
   font-weight: bold;
+  margin: 15px 0;
 }
 
 .nmt-side-mid-dates-wrapper {
@@ -49,14 +50,15 @@ body.slider-grabbed {
 .nmt-side-slider {
   position: absolute;
   display: flex;
-  left: -4px;
+  left: -5px;
   cursor: grab;
 }
 
 /* .nmt-side-slider-point {
-  width: 10px;
-  height: 1px;
-  background-color: #000000;
+  width: 11px;
+  height: 5px;
+  margin-top: -3px;
+  background: #000000;
 } */
 
 .nmt-side-slider-hand {
@@ -88,5 +90,9 @@ body.slider-grabbed {
 }
 
 .nmt-content-event.active-event {
+  display: block;
+}
+
+.nm-content-event-wrapper {
   display: flex;
 }

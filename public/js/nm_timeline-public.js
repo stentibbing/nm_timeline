@@ -1,31 +1,36 @@
 (function ($) {
   "use strict";
   $(function () {
-    const dates = $(".nmt-date");
     const separator = $(".nmt-side-mid-separator");
+    let events = [];
 
     /**
      * Create array of event objects
      */
-    const events = [];
-    let eventIteration = 0;
+    function initEvents() {
+      events = [];
+      let dates = $(".nmt-date");
+      let eventIteration = 0;
 
-    dates.each(function () {
-      let separatorPointY;
-      if (eventIteration == 0) {
-        separatorPointY = 0;
-      } else if (eventIteration == dates.length - 1) {
-        separatorPointY = separator.height() - 1;
-      } else {
-        separatorPointY = $(this).position().top;
-      }
-      events.push({
-        id: $(this).data("id"),
-        date: $(this).data("date"),
-        top: separatorPointY,
+      dates.each(function () {
+        let separatorPointY;
+        if (eventIteration == 0) {
+          separatorPointY = 0;
+        } else if (eventIteration == dates.length - 1) {
+          separatorPointY = separator.height() - 1;
+        } else {
+          separatorPointY = $(this).position().top;
+        }
+        events.push({
+          id: $(this).data("id"),
+          date: $(this).data("date"),
+          top: separatorPointY,
+        });
+        eventIteration++;
       });
-      eventIteration++;
-    });
+    }
+
+    initEvents();
 
     /**
      * Observe slider changes and update date label accordingly
@@ -112,6 +117,9 @@
             $(".nmt-side-slider").css("top", sliderPos + "px");
           }
         }
+      })
+      .resize(function (event) {
+        initEvents();
       });
   });
 })(jQuery);

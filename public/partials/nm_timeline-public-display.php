@@ -45,12 +45,14 @@ ob_start(); ?>
   <div class="nmt-content">
     <?php for ($i = 0; $i <= count($events) - 1; $i++): ?>
       <div class="nmt-content-event<?php echo $i == 0 ? ' active-event' : ''; ?>" data-id="<?php echo $events[$i]['id']; ?>">
-        <div class="nmt-content-side">
-          <h2 class="nmt-content-title"><?php echo $events[$i]['title']; ?></h2>
-          <div class="nmt-content-excerpt"><?php echo $events[$i]['excerpt']; ?></div>
-        </div>
-        <div class="nmt-content-img">
-          <?php echo get_the_post_thumbnail($events[$i]['id']); ?>
+        <div class="nm-content-event-wrapper">
+          <div class="nmt-content-side">
+            <h2 class="nmt-content-title"><?php echo $events[$i]['title']; ?></h2>
+            <div class="nmt-content-excerpt"><?php echo $events[$i]['excerpt']; ?></div>
+          </div>
+          <div class="nmt-content-img">
+            <?php echo get_the_post_thumbnail($events[$i]['id']); ?>
+          </div>
         </div>
       </div>
     <?php endfor; ?>
