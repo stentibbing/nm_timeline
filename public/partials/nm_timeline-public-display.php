@@ -48,7 +48,7 @@ ob_start(); ?>
         <div class="nm-content-event-wrapper">
           <div class="nmt-content-side">
             <h2 class="nmt-content-title"><?php echo $events[$i]['title']; ?></h2>
-            <div class="nmt-content-excerpt"><?php echo $events[$i]['excerpt']; ?></div>
+            <div class="nmt-content-excerpt"><p><?php echo $events[$i]['excerpt']; ?></p></div>
           </div>
           <div class="nmt-content-img">
             <?php echo get_the_post_thumbnail($events[$i]['id']); ?>
