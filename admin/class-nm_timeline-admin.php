@@ -142,8 +142,9 @@ class Nm_timeline_Admin
                 return;
             }
             if ($query->get('post_type') == 'event' && empty($query->get('orderby'))) {
-                $query->set('order', 'DSC');
-                $query->set('orderby', 'meta_value');
+                $query->set('orderby', 'meta_value_num');
+                $query->set('meta_key', 'nm_timeline_event_date');
+                $query->set('order', 'ASC');
             }
         });
     }
