@@ -28,7 +28,7 @@ ob_start(); ?>
       </div>
       <div class="nmt-side-mid-separator">
         <div class="nmt-side-slider">
-          <!-- <div class="nmt-side-slider-point"></div>   -->
+          <div class="nmt-side-slider-point"></div>  
           <div class="nmt-side-slider-hand"></div>
           <div class="nmt-side-slider-label"><?php echo $events[0]['date']; ?></div>
         </div>

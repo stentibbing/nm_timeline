@@ -10,23 +10,33 @@
     function initEvents() {
       events = [];
       let dates = $(".nmt-date");
-      let eventIteration = 0;
-
-      dates.each(function () {
-        let separatorPointY;
-        if (eventIteration == 0) {
-          separatorPointY = 0;
-        } else if (eventIteration == dates.length - 1) {
-          separatorPointY = separator.height() - 1;
+      dates.each(function (index) {
+        let eventTop;
+        if (index == 0) {
+          eventTop = 0;
+        } else if (index == dates.length - 1) {
+          eventTop = $(".nmt-side-mid-separator").height() - 1;
         } else {
-          separatorPointY = $(this).position().top;
+          eventTop = Math.round(
+            $(this).position().top + $(this).innerHeight() / 2
+          );
         }
         events.push({
           id: $(this).data("id"),
           date: $(this).data("date"),
-          top: separatorPointY,
+          top: eventTop,
         });
-        eventIteration++;
+      });
+
+      $(".nmt-side-separator-point").remove();
+      events.forEach(function (event, index) {
+        if (index > 0 && index < events.length - 1) {
+          separator.append(
+            '<div class="nmt-side-separator-point" style="position: absolute; top:' +
+              event.top +
+              'px;"</div>'
+          );
+        }
       });
     }
 
@@ -35,7 +45,6 @@
     /**
      * Observe slider changes and update date label accordingly
      */
-    let activeEventId = events[0].id;
     const MutationObserver = window.MutationObserver;
     const myObserver = new MutationObserver((mutation) => {
       let top = parseInt(mutation[0].target.style.top);
@@ -64,6 +73,7 @@
      * Find the nearest event date to slider, move slider to that
      * and render content for that date if not currently active
      */
+    let activeEventId = events[0].id;
     function selectNearestDate() {
       let sliderPos = $(".nmt-side-slider").position().top;
       let nearest = events.reduce(function (prev, cur) {

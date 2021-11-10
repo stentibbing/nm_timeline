@@ -10,13 +10,13 @@ body.slider-grabbed {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 200px;
+  margin-right: 100px;
 }
 
 .nmt-side-first-date,
 .nmt-side-last-date {
   font-weight: bold;
-  margin: 15px 0;
+  padding: 15px 0;
 }
 
 .nmt-side-mid-dates-wrapper {
@@ -25,6 +25,7 @@ body.slider-grabbed {
 }
 
 .nmt-side-mid-dates {
+  position: relative;
   padding: 20px 0;
   width: 80px;
 }
@@ -39,7 +40,7 @@ body.slider-grabbed {
   background-color: #000000;
 }
 
-.nmt-separator-point {
+.nmt-side-separator-point {
   position: absolute;
   width: 10px;
   height: 1px;
@@ -54,12 +55,11 @@ body.slider-grabbed {
   cursor: grab;
 }
 
-/* .nmt-side-slider-point {
-  width: 11px;
-  height: 5px;
-  margin-top: -3px;
+.nmt-side-slider-point {
+  width: 10px;
+  height: 1px;
   background: #000000;
-} */
+}
 
 .nmt-side-slider-hand {
   position: absolute;
@@ -80,11 +80,6 @@ body.slider-grabbed {
   left: 70px;
 }
 
-.nmt-content-side {
-  width: 30%;
-  margin-right: 100px;
-}
-
 .nmt-content-event {
   display: none;
 }
@@ -95,4 +90,13 @@ body.slider-grabbed {
 
 .nm-content-event-wrapper {
   display: flex;
+}
+
+.nmt-content-side {
+  width: 30%;
+  margin-right: 100px;
+}
+
+.nmt-content-img {
+  max-width: 500px;
 }
