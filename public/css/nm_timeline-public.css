@@ -10,7 +10,7 @@ body.slider-grabbed {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 100px;
+  margin-right: 150px;
 }
 
 .nmt-side-first-date,
@@ -90,11 +90,14 @@ body.slider-grabbed {
 
 .nm-content-event-wrapper {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .nmt-content-side {
-  width: 30%;
-  margin-right: 100px;
+  min-width: 200px;
+  max-width: 30%;
+  margin-right: 40px;
 }
 
 .nmt-content-img {

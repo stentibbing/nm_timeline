@@ -2,6 +2,11 @@
   "use strict";
   $(function () {
     const separator = $(".nmt-side-mid-separator");
+
+    /**
+     * Follow separator height and reinit events due to window resize
+     */
+    let originalSeparatorHeight = separator.height();
     let events = [];
 
     /**
@@ -46,7 +51,7 @@
      * Observe slider changes and update date label accordingly
      */
     const MutationObserver = window.MutationObserver;
-    const myObserver = new MutationObserver((mutation) => {
+    const sliderObserver = new MutationObserver((mutation) => {
       let top = parseInt(mutation[0].target.style.top);
       let updatedDate;
       for (let i = 0; i <= events.length - 1; i++) {
@@ -66,7 +71,7 @@
     });
 
     $(".nmt-side-slider").each(function () {
-      myObserver.observe(this, { attributes: true });
+      sliderObserver.observe(this, { attributes: true });
     });
 
     /**
@@ -129,7 +134,14 @@
         }
       })
       .resize(function (event) {
-        initEvents();
+        /**
+         * If separator height changes due to window resize, init events and move slider
+         */
+        if (separator.height() != originalSeparatorHeight) {
+          initEvents();
+          selectNearestDate();
+          originalSeparatorHeight = separator.height();
+        }
       });
   });
 })(jQuery);
