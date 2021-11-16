@@ -16,6 +16,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       nm_timeline
  * Domain Path:       /languages
+ * GitHub Plugin URI: stentibbing/nm_timeline
  */
 
 // If this file is called directly, abort.
