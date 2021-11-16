@@ -104,6 +104,26 @@ body.slider-grabbed {
   width: 500px;
 }
 
+.nmt-content-img img {
+  width: 100%;
+}
+
+@media (max-width: 1200px) {
+  .nmt-content-side {
+    max-width: unset;
+  }
+  .nmt-content-img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 811px) {
+  .nm-timeline-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 811px) {
   .nm-timeline {
     display: none;
@@ -118,4 +138,8 @@ body.slider-grabbed {
     display: flex;
     flex-direction: column;
   }
+}
+
+.nmt-mobile-event-img img {
+  width: 100%;
 }
