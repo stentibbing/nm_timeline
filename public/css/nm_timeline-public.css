@@ -103,3 +103,19 @@ body.slider-grabbed {
 .nmt-content-img {
   width: 500px;
 }
+
+@media (max-width: 811px) {
+  .nm-timeline {
+    display: none;
+  }
+}
+
+.nm-timeline-mobile {
+  display: none;
+}
+@media (max-width: 811px) {
+  .nm-timeline-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
