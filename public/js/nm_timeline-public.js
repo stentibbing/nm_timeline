@@ -106,7 +106,7 @@
     let originalSliderPos = 0;
     let originalCurPos = 0;
 
-    $(".nmt-side-slider").mousedown(function (event) {
+    $(".nmt-side-slider").bind("mousedown touchstart", function (event) {
       event.preventDefault();
       dragInitiated = true;
       originalCurPos = event.pageY;
@@ -114,13 +114,15 @@
       $("*").css("cursor", "grabbing");
     });
 
-    $(window)
-      .mouseup(function () {
-        dragInitiated = false;
-        $("*").css("cursor", "");
-        selectNearestDate();
+    $("body")
+      .bind("mouseup touchend", function () {
+        if (dragInitiated) {
+          dragInitiated = false;
+          $("*").css("cursor", "");
+          selectNearestDate();
+        }
       })
-      .mousemove(function (event) {
+      .bind("mousemove touchmove", function (event) {
         if (dragInitiated) {
           let curChange = -1 * (originalCurPos - event.pageY);
           let sliderPos = originalSliderPos + curChange;

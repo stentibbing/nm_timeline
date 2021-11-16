@@ -6,6 +6,7 @@
 ob_start(); ?>
 
 <div class="nm-timeline">
+
   <div class="nmt-side">
 
     <div class="nmt-side-first-date nmt-date" 
@@ -26,6 +27,7 @@ ob_start(); ?>
           </div>
         <?php endfor; ?>
       </div>
+
       <div class="nmt-side-mid-separator">
         <div class="nmt-side-slider">
           <div class="nmt-side-slider-point"></div>  
@@ -42,6 +44,7 @@ ob_start(); ?>
     <?php echo $events[count($events) - 1]['date'] ?>
     </div>
   </div>
+  
   <div class="nmt-content">
     <?php for ($i = 0; $i <= count($events) - 1; $i++): ?>
       <div class="nmt-content-event<?php echo $i == 0 ? ' active-event' : ''; ?>" data-id="<?php echo $events[$i]['id']; ?>">
@@ -59,6 +62,24 @@ ob_start(); ?>
   </div>
 </div>
 
+<div class="nm-timeline-mobile">
+  <?php foreach ($events as $event): ?>
+    <div class="nmt-mobile-event">
+      <div class="nmt-mobile-event-heading">
+        <div class="nmt-mobile-event-date"><?php echo $event['date']; ?></div>
+        <h2><?php echo $event['title']; ?></h2>
+      </div>
+      <div class="nmt-mobile-event-content">        
+        <div class="nmt-mobile-event-img">
+          <?php echo get_the_post_thumbnail($event['id']); ?>
+        </div>
+        <p class="nmt-mobile-event-text">
+          <?php echo $event['excerpt']; ?>
+        </p>
+      </div>
+    </div>
+  <?php endforeach; ?>
+</div>
 
 <?php
 return ob_get_clean();
