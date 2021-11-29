@@ -8,10 +8,10 @@
  * @wordpress-plugin
  * Plugin Name:       Nordic Milk Timeline
  * Plugin URI:        https://www.taifuun.ee
- * Description:       This plugin adds timeline custom post type for event creation. For displaying in public, use nm_timeline shortcode.
- * Version:           1.0.3
- * Author:            Sten Tibbing
- * Author URI:        https://www.kbuum.com
+ * Description:       This plugin adds draggable timeline
+ * Version:           1.0.4
+ * Author:            Taifuun OÜ
+ * Author URI:        https://www.taifuun.ee
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       nm_timeline
@@ -27,7 +27,7 @@ if (! defined('WPINC')) {
 /**
  * Currently plugin version.
  */
-define('NM_TIMELINE_VERSION', '1.0.3');
+define('NM_TIMELINE_VERSION', '1.0.4');
 
 /**
  * The code that runs during plugin activation.
